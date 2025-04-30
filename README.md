@@ -3,6 +3,10 @@
 
 This is an interactive, accessible web-based learning tool designed for grades 4–6 to master U.S. state-capital pairs and explore key geographic features of each state.
 
+## 🎮 Quick Access to Game
+
+👉 [Click here to start the game](US_States_2Level_Game.html)
+
 ## 🎮 Features
 
 ### Level 1: Match & Memorize
