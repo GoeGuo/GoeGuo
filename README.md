@@ -1,9 +1,9 @@
-- 👋 Hi, I’m @Guo
+- 👋 Hi, I’m @GeoGuo
 - 👀 I’m interested in AI and Education
 - 🌱 I’m currently learning Curriculum and Instruction and App Design.
 - 💞️ I’m looking to collaborate on intereting ideas on AI and ESL (English as a Second Laguage) education.
-- 📫 How to reach me ...
-- 😄 Pronouns: ...
+- 📫 How to reach me 'Ivyguo2023@126.com'
+- 😄 Pronouns: She/Her/Hers
 - ⚡ Fun fact: I'm a vlogger!
 
 <!---
