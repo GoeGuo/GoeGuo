@@ -1,15 +1,4 @@
-- 👋 Hi, I’m @GeoGuo
-- 👀 I’m interested in AI and Education
-- 🌱 I’m currently learning Curriculum and Instruction and App Design.
-- 💞️ I’m looking to collaborate on intereting ideas on AI and ESL (English as a Second Laguage) education.
-- 📫 How to reach me 'Ivyguo2023@126.com'
-- 😄 Pronouns: She/Her/Hers
-- ⚡ Fun fact: I'm a vlogger!
 
-<!---
-GoeGuo/GoeGuo is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
 # 🇺🇸 US States Learning Game (2-Level HTML5 App)
 
 This is an interactive, accessible web-based learning tool designed for grades 4–6 to master U.S. state-capital pairs and explore key geographic features of each state.
@@ -82,5 +71,4 @@ To host the game:
 
 Developed with support from AI-assisted HTML5 design.  
 For feedback or contributions, please contact: `Ivyguo2023@126.com`
-
 

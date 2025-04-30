@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>State-Capital Interactive Map</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e2f;
+      color: #ffffff;
+      text-align: center;
+      padding: 30px;
+    }
+    .card {
+      background: #2b2b3c;
+      padding: 25px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-width: 700px;
+      margin: 20px auto;
+    }
+    input {
+      margin: 12px 0;
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      background: #3a3a50;
+      color: white;
+      border: 1px solid #666;
+      border-radius: 5px;
+    }
+    img {
+      width: 100%;
+      max-width: 650px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .output {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🗺️ U.S. States & Capitals Interactive</h1>
+<div class="card">
+  <img src="us_map_with_capitals.jpeg" alt="U.S. map with capitals">
+  <div>
+    <input id="stateInput" type="text" placeholder="Type a U.S. state (e.g., Texas)">
+    <div class="output" id="capitalOutput">Capital: [Waiting for input]</div>
+  </div>
+</div>
+
+<script>
+const stateCapitals = {
+  "Alabama": "Montgomery",
+  "Alaska": "Juneau",
+  "Arizona": "Phoenix",
+  "Arkansas": "Little Rock",
+  "California": "Sacramento",
+  "Colorado": "Denver",
+  "Connecticut": "Hartford",
+  "Delaware": "Dover",
+  "Florida": "Tallahassee",
+  "Georgia": "Atlanta",
+  "Hawaii": "Honolulu",
+  "Idaho": "Boise",
+  "Illinois": "Springfield",
+  "Indiana": "Indianapolis",
+  "Iowa": "Des Moines",
+  "Kansas": "Topeka",
+  "Kentucky": "Frankfort",
+  "Louisiana": "Baton Rouge",
+  "Maine": "Augusta",
+  "Maryland": "Annapolis",
+  "Massachusetts": "Boston",
+  "Michigan": "Lansing",
+  "Minnesota": "St. Paul",
+  "Mississippi": "Jackson",
+  "Missouri": "Jefferson City",
+  "Montana": "Helena",
+  "Nebraska": "Lincoln",
+  "Nevada": "Carson City",
+  "New Hampshire": "Concord",
+  "New Jersey": "Trenton",
+  "New Mexico": "Santa Fe",
+  "New York": "Albany",
+  "North Carolina": "Raleigh",
+  "North Dakota": "Bismarck",
+  "Ohio": "Columbus",
+  "Oklahoma": "Oklahoma City",
+  "Oregon": "Salem",
+  "Pennsylvania": "Harrisburg",
+  "Rhode Island": "Providence",
+  "South Carolina": "Columbia",
+  "South Dakota": "Pierre",
+  "Tennessee": "Nashville",
+  "Texas": "Austin",
+  "Utah": "Salt Lake City",
+  "Vermont": "Montpelier",
+  "Virginia": "Richmond",
+  "Washington": "Olympia",
+  "West Virginia": "Charleston",
+  "Wisconsin": "Madison",
+  "Wyoming": "Cheyenne"
+};
+
+function speak(text) {
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-US";
+  speechSynthesis.speak(utterance);
+}
+
+document.getElementById("stateInput").addEventListener("input", () => {
+  const input = document.getElementById("stateInput").value.trim();
+  const capital = stateCapitals[input];
+  const output = document.getElementById("capitalOutput");
+  if (capital) {
+    output.textContent = "Capital: " + capital;
+    speak(capital);
+  } else {
+    output.textContent = "Capital: [Unknown or misspelled]";
+  }
+});
+
+const stateGeography = {
+  "Alabama": "Known for the Civil Rights Trail and humid subtropical climate.",
+  "Alaska": "Largest state by area; home to Denali and tundra biome.",
+  "Arizona": "Contains the Grand Canyon and vast desert plateaus.",
+  "Arkansas": "Known for hot springs, mountains, and diamond parks.",
+  "California": "Diverse geography: coastline, Sierra Nevada, and redwoods.",
+  "Colorado": "Famous for the Rocky Mountains and alpine ski resorts.",
+  "Connecticut": "Has a long maritime history and coastal forests.",
+  "Delaware": "Second smallest state, low elevation coastal plain.",
+  "Florida": "Flat, swampy peninsula with subtropical/tropical zones.",
+  "Georgia": "Coastal plains, peach farms, and Blue Ridge Mountains.",
+  "Hawaii": "Island state with volcanoes and tropical rainforests.",
+  "Idaho": "Mountainous with forests and river canyons.",
+  "Illinois": "Flat prairie and Lake Michigan shoreline.",
+  "Indiana": "Corn Belt state with rolling plains.",
+  "Iowa": "Predominantly farmland and Mississippi River border.",
+  "Kansas": "Flat prairie and wheat farming state.",
+  "Kentucky": "Known for caves and Appalachian mountains.",
+  "Louisiana": "Swamplands and bayous; shaped by the Mississippi River.",
+  "Maine": "Rocky Atlantic coast and pine forests.",
+  "Maryland": "Chesapeake Bay estuary and varied terrain.",
+  "Massachusetts": "Coastal lowlands and Appalachian foothills.",
+  "Michigan": "Great Lakes state with peninsula geography.",
+  "Minnesota": "10,000 lakes, forests, and cold winters.",
+  "Mississippi": "Delta farmland and Gulf Coast wetlands.",
+  "Missouri": "Ozark Mountains and central plains.",
+  "Montana": "Big sky country with prairies and Glacier NP.",
+  "Nebraska": "Great Plains and Platte River valley.",
+  "Nevada": "Desert basin and Sierra mountain ranges.",
+  "New Hampshire": "White Mountains and Atlantic coast.",
+  "New Jersey": "Pine Barrens, coastlines, and suburban belts.",
+  "New Mexico": "High desert and Rio Grande valley.",
+  "New York": "From Adirondacks to Hudson Valley and NYC.",
+  "North Carolina": "From coastal plains to Appalachian peaks.",
+  "North Dakota": "Great Plains and Badlands.",
+  "Ohio": "Hills in the south, plains in the north.",
+  "Oklahoma": "Tornado alley and Red River plains.",
+  "Oregon": "Volcanic Cascades, forests, and Pacific coast.",
+  "Pennsylvania": "Appalachian plateau and historical river valleys.",
+  "Rhode Island": "Smallest state, jagged coastline and bays.",
+  "South Carolina": "Coastal marshes and lowcountry.",
+  "South Dakota": "Mount Rushmore and Great Plains.",
+  "Tennessee": "Smoky Mountains and Nashville Basin.",
+  "Texas": "Varied: deserts, forests, coasts, and plains.",
+  "Utah": "Canyons and salt flats in desert landscape.",
+  "Vermont": "Green Mountains and maple forests.",
+  "Virginia": "Shenandoah Valley and Chesapeake Bay.",
+  "Washington": "Rainforests, volcanoes, and Puget Sound.",
+  "West Virginia": "Mountain state with coal and rivers.",
+  "Wisconsin": "Lakes, dairy farms, and forests.",
+  "Wyoming": "Home to Yellowstone and wide open basins."
+};
+
+
+document.getElementById("stateInput").addEventListener("input", () => {
+  const input = document.getElementById("stateInput").value.trim();
+  const capital = stateCapitals[input];
+  const geo = stateGeography[input];
+  const output = document.getElementById("capitalOutput");
+  if (capital) {
+    output.textContent = "Capital: " + capital;
+    speak(capital);
+    document.getElementById("geoOutput").textContent = "Geography: " + geo;
+  } else {
+    output.textContent = "Capital: [Unknown or misspelled]";
+    document.getElementById("geoOutput").textContent = "Geography: [Unavailable]";
+  }
+});
+</script>
+
+</body>
+</html>
