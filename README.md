@@ -24,7 +24,7 @@
 
 - **标签切换总入口**  
   Central interface with tab-switching to access all learning modes  
-  👉 `index.html`
+  👉 `Index.html`
 
 ---
 
@@ -35,7 +35,7 @@
 | `LearnMode_ImageMap_Complete50.html` | Level 1 英语学习界面 / English-only learning interface |
 | `LearnMode_ImageMap_Complete50_CN_Full_UPDATED.html` | Level 1 中英双语界面 / Bilingual interface |
 | `StateCapital_GeoLinked_Final.html` | Level 2 地理输入探索模式 / State name to info display mode |
-| `US_States_2Level_Game_Complete50_Toggle.html` | 标签切换界面，整合全部功能 / Tab-switching UI with all modes |
+| `Index.html` | 标签切换界面，整合全部功能 / Tab-switching UI with all modes |
 | `us_map_with_capitals.jpeg` | 州与首府地图图像 / U.S. map with capitals |
 | `README.md` | GitHub 项目说明文件 / Project introduction file |
 
