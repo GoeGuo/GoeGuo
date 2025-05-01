@@ -2,7 +2,7 @@
 # 🇺🇸 U.S. States & Capitals Interactive Learning System | 美国地名互动学习系统
 
 🎮 **Quick Access to Game | 快速启动游戏**  
-[Start Interactive Game on GitHub Pages »](https://goeguo.github.io/GoeGuo/)
+[Start Interactive Game on GitHub Pages »](https://goeguo.github/GoeGuo/)
 
 ![Preview Screenshot](preview.png)
 
