@@ -33,10 +33,7 @@
 
 📦 GitHub Pages 在线访问：
 ```
-https://GeoGuo.github.io/GeoGuo/US_States_2Level_Game_Complete50_Toggle.html
-```
 
-或打开以下页面：
 - `LearnMode_ImageMap_Complete50.html` - Level 1 英文练习
 - `LearnMode_ImageMap_Complete50_CN_Full_UPDATED.html` - Level 1 中英文练习
 - `StateCapital_GeoLinked_Final.html` - Level 2 地理探索
