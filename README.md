@@ -6,8 +6,6 @@
 
 ![Preview Screenshot](preview.png)
 
-[![View on GitHub Pages](https://img.shields.io/badge/Launch%20App-GitHub%20Pages-blue?style=for-the-badge)](https://your-username.github.io/your-repo/index.html)
-
 ---
 
 ## 🎮 模式选择 | Mode Selection
@@ -26,7 +24,7 @@
 
 - **标签切换总入口**  
   Central interface with tab-switching to access all learning modes  
-  👉 `US_States_2Level_Game_Complete50_Toggle.html`
+  👉 `index.html`
 
 ---
 
