@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Learn U.S. States &amp; Capitals - Image Map Version</title>
+<style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e2f;
+      color: #ffffff;
+      text-align: center;
+      padding: 30px;
+    }
+    .card {
+      background: #2b2b3c;
+      padding: 25px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-width: 700px;
+      margin: 20px auto;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .state, .capital {
+      font-size: 28px;
+      margin: 12px 0;
+      cursor: pointer;
+    }
+    .state:hover, .capital:hover {
+      text-decoration: underline;
+    }
+    button {
+      margin: 6px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .listen { background-color: #4CAF50; color: white; }
+    .nav { background-color: #2196F3; color: white; }
+    .hint { background-color: #f39c12; color: white; }
+    .hint-text {
+      font-style: italic;
+      color: #aaa;
+      margin-top: 10px;
+      display: none;
+    }
+    input {
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 16px;
+      width: 80%;
+      border: 1px solid #555;
+      border-radius: 5px;
+      background-color: #3a3a50;
+      color: white;
+    }
+    img {
+      width: 100%;
+      max-width: 650px;
+      margin: 15px 0;
+      border-radius: 8px;
+    }
+  
+button {
+  padding: 10px 18px;
+  font-size: 16px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button {
+  padding: 10px 18px;
+  font-size: 16px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<h1>🗺️ Learn U.S. States and Capitals</h1>
+<div class="card">
+<img alt="U.S. map with capitals" src="us_map_with_capitals.jpeg"/>
+<div class="state" id="stateName" onmouseover="speakHover('state')">State: </div>
+<input id="stateInput" onfocus="speakHover('state')" oninput="checkAnswer()" placeholder="Type the state name..." type="text"/>
+<div class="capital" id="capitalName" onmouseover="speakHover('capital')">Capital: </div>
+<input id="capitalInput" onfocus="speakHover('capital')" oninput="checkAnswer()" placeholder="Type the capital name..." type="text"/>
+
+
+
+
+<div class="hint-text" id="hintText">Hint appears here...</div><div class="button-group"><button class="listen" onclick="speakFull()">🔊 Listen All</button><button class="nav" onclick="prevCard()">⬅ Back</button><button class="nav" onclick="nextCard()">Next ➡</button><button class="hint" onclick="toggleHint()">💡 Hint</button></div>
+</div>
+<script>
+  const data = [
+  {"state": "Alabama", "capital": "Montgomery", "hint": "Montgomery was the first capital of the Confederacy.", "state_cn": "亚拉巴马州", "capital_cn": "蒙哥马利"},
+  {"state": "Alaska", "capital": "Juneau", "hint": "Juneau is only accessible by boat or plane.", "state_cn": "阿拉斯加州", "capital_cn": "朱诺"},
+  {"state": "Arizona", "capital": "Phoenix", "hint": "Phoenix is one of the hottest cities in the U.S.", "state_cn": "亚利桑那州", "capital_cn": "凤凰城"},
+  {"state": "Arkansas", "capital": "Little Rock", "hint": "Little Rock has a famous Central High School from civil rights history.", "state_cn": "阿肯色州", "capital_cn": "小石城"},
+  {"state": "California", "capital": "Sacramento", "hint": "Sacramento grew rapidly due to the Gold Rush.", "state_cn": "加利福尼亚州", "capital_cn": "萨克拉门托"},
+  {"state": "Colorado", "capital": "Denver", "hint": "Denver is nicknamed the 'Mile High City'.", "state_cn": "科罗拉多州", "capital_cn": "丹佛"},
+  {"state": "Connecticut", "capital": "Hartford", "hint": "Hartford is home to the oldest public art museum in the U.S.", "state_cn": "康涅狄格州", "capital_cn": "哈特福德"},
+  {"state": "Delaware", "capital": "Dover", "hint": "Dover was the first state capital after independence.", "state_cn": "特拉华州", "capital_cn": "多佛"},
+  {"state": "Florida", "capital": "Tallahassee", "hint": "Tallahassee is near beautiful Gulf Coast beaches.", "state_cn": "佛罗里达州", "capital_cn": "塔拉哈西"},
+  {"state": "Georgia", "capital": "Atlanta", "hint": "Atlanta hosted the 1996 Summer Olympics.", "state_cn": "乔治亚州", "capital_cn": "亚特兰大"},
+  {"state": "Hawaii", "capital": "Honolulu", "hint": "Honolulu is the only U.S. capital with a royal palace.", "state_cn": "夏威夷州", "capital_cn": "火奴鲁鲁"},
+  {"state": "Idaho", "capital": "Boise", "hint": "Boise sits near the Rocky Mountains.", "state_cn": "爱达荷州", "capital_cn": "博伊西"},
+  {"state": "Illinois", "capital": "Springfield", "hint": "Springfield was Abraham Lincoln’s home.", "state_cn": "伊利诺伊州", "capital_cn": "斯普林菲尔德"},
+  {"state": "Indiana", "capital": "Indianapolis", "hint": "Indianapolis hosts the Indy 500 race.", "state_cn": "印第安纳州", "capital_cn": "印第安纳波利斯"},
+  {"state": "Iowa", "capital": "Des Moines", "hint": "Des Moines is a hub for corn and soybean production.", "state_cn": "爱荷华州", "capital_cn": "得梅因"},
+  {"state": "Kansas", "capital": "Topeka", "hint": "Topeka was key in the fight for school desegregation.", "state_cn": "堪萨斯州", "capital_cn": "托皮卡"},
+  {"state": "Kentucky", "capital": "Frankfort", "hint": "Frankfort is near famous horse farms.", "state_cn": "肯塔基州", "capital_cn": "法兰克福"},
+  {"state": "Louisiana", "capital": "Baton Rouge", "hint": "Baton Rouge means 'red stick' in French.", "state_cn": "路易斯安那州", "capital_cn": "巴吞鲁日"},
+  {"state": "Maine", "capital": "Augusta", "hint": "Augusta is known for lobsters and forests.", "state_cn": "缅因州", "capital_cn": "奥古斯塔"},
+  {"state": "Maryland", "capital": "Annapolis", "hint": "Annapolis is home to the U.S. Naval Academy.", "state_cn": "马里兰州", "capital_cn": "安纳波利斯"},
+  {"state": "Massachusetts", "capital": "Boston", "hint": "Boston played a key role in the American Revolution.", "state_cn": "马萨诸塞州", "capital_cn": "波士顿"},
+  {"state": "Michigan", "capital": "Lansing", "hint": "Lansing is near the Great Lakes.", "state_cn": "密歇根州", "capital_cn": "兰辛"},
+  {"state": "Minnesota", "capital": "Saint Paul", "hint": "Saint Paul is part of the Twin Cities.", "state_cn": "明尼苏达州", "capital_cn": "圣保罗"},
+  {"state": "Mississippi", "capital": "Jackson", "hint": "Jackson has many blues music festivals.", "state_cn": "密西西比州", "capital_cn": "杰克逊"},
+  {"state": "Missouri", "capital": "Jefferson City", "hint": "Jefferson City is named after President Thomas Jefferson.", "state_cn": "密苏里州", "capital_cn": "杰斐逊市"},
+  {"state": "Montana", "capital": "Helena", "hint": "Helena is near the Rocky Mountains.", "state_cn": "蒙大拿州", "capital_cn": "海伦娜"},
+  {"state": "Nebraska", "capital": "Lincoln", "hint": "Lincoln is known for corn and wide plains.", "state_cn": "内布拉斯加州", "capital_cn": "林肯"},
+  {"state": "Nevada", "capital": "Carson City", "hint": "Carson City is close to Lake Tahoe.", "state_cn": "内华达州", "capital_cn": "卡森城"},
+  {"state": "New Hampshire", "capital": "Concord", "hint": "Concord is one of the oldest U.S. capitals.", "state_cn": "新罕布什尔州", "capital_cn": "康科德"},
+  {"state": "New Jersey", "capital": "Trenton", "hint": "Trenton hosted a key Revolutionary War battle.", "state_cn": "新泽西州", "capital_cn": "特伦顿"},
+  {"state": "New Mexico", "capital": "Santa Fe", "hint": "Santa Fe has many Native American cultural sites.", "state_cn": "新墨西哥州", "capital_cn": "圣菲"},
+  {"state": "New York", "capital": "Albany", "hint": "Albany sits on the Hudson River.", "state_cn": "纽约州", "capital_cn": "奥尔巴尼"},
+  {"state": "North Carolina", "capital": "Raleigh", "hint": "Raleigh is part of the 'Research Triangle'.", "state_cn": "北卡罗来纳州", "capital_cn": "罗利"},
+  {"state": "North Dakota", "capital": "Bismarck", "hint": "Bismarck is named after a German leader.", "state_cn": "北达科他州", "capital_cn": "俾斯麦"},
+  {"state": "Ohio", "capital": "Columbus", "hint": "Columbus has one of the biggest college campuses.", "state_cn": "俄亥俄州", "capital_cn": "哥伦布"},
+  {"state": "Oklahoma", "capital": "Oklahoma City", "hint": "Oklahoma City has a large cowboy heritage center.", "state_cn": "俄克拉荷马州", "capital_cn": "俄克拉荷马城"},
+  {"state": "Oregon", "capital": "Salem", "hint": "Salem is known for cherry trees and state fairs.", "state_cn": "俄勒冈州", "capital_cn": "塞勒姆"},
+  {"state": "Pennsylvania", "capital": "Harrisburg", "hint": "Harrisburg is close to historic Gettysburg.", "state_cn": "宾夕法尼亚州", "capital_cn": "哈里斯堡"},
+  {"state": "Rhode Island", "capital": "Providence", "hint": "Providence is one of the oldest U.S. cities.", "state_cn": "罗得岛州", "capital_cn": "普罗维登斯"},
+  {"state": "South Carolina", "capital": "Columbia", "hint": "Columbia has a warm subtropical climate.", "state_cn": "南卡罗来纳州", "capital_cn": "哥伦比亚"},
+  {"state": "South Dakota", "capital": "Pierre", "hint": "Pierre is near Mount Rushmore.", "state_cn": "南达科他州", "capital_cn": "皮尔"},
+  {"state": "Tennessee", "capital": "Nashville", "hint": "Nashville is the country music capital.", "state_cn": "田纳西州", "capital_cn": "纳什维尔"},
+  {"state": "Texas", "capital": "Austin", "hint": "Austin is famous for live music and tacos.", "state_cn": "德克萨斯州", "capital_cn": "奥斯汀"},
+  {"state": "Utah", "capital": "Salt Lake City", "hint": "Salt Lake City hosted the 2002 Winter Olympics.", "state_cn": "犹他州", "capital_cn": "盐湖城"},
+  {"state": "Vermont", "capital": "Montpelier", "hint": "Montpelier is the smallest U.S. state capital.", "state_cn": "佛蒙特州", "capital_cn": "蒙彼利埃"},
+  {"state": "Virginia", "capital": "Richmond", "hint": "Richmond was capital of the Confederacy.", "state_cn": "弗吉尼亚州", "capital_cn": "里士满"},
+  {"state": "Washington", "capital": "Olympia", "hint": "Olympia is near mountains and ocean.", "state_cn": "华盛顿州", "capital_cn": "奥林匹亚"},
+  {"state": "West Virginia", "capital": "Charleston", "hint": "Charleston is in the Appalachian Mountains.", "state_cn": "西弗吉尼亚州", "capital_cn": "查尔斯顿"},
+  {"state": "Wisconsin", "capital": "Madison", "hint": "Madison has many lakes and bike trails.", "state_cn": "威斯康星州", "capital_cn": "麦迪逊"},
+  {"state": "Wyoming", "capital": "Cheyenne", "hint": "Cheyenne celebrates cowboy culture each July.", "state_cn": "怀俄明州", "capital_cn": "夏延"}
+];
+
+  let current = 0;
+
+  function updateCard() {
+    const s = data[current];
+    document.getElementById("stateName").textContent = "State: " + s.state + " (" + s.state_cn + ")";
+    document.getElementById("capitalName").textContent = "Capital: " + s.capital + " (" + s.capital_cn + ")";
+    document.getElementById("stateInput").value = "";
+    document.getElementById("capitalInput").value = "";
+    document.getElementById("hintText").style.display = "none";
+    document.getElementById("hintText").textContent = s.hint;
+  }
+
+  function speak(text) {
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakFull() {
+    const s = data[current];
+    speak("The capital of " + s.state + " is " + s.capital);
+  }
+
+  function speakHover(type) {
+    const s = data[current];
+    if (type === 'state') speak(s.state);
+    else if (type === 'capital') speak(s.capital);
+  }
+
+  function nextCard() {
+    current = (current + 1) % data.length;
+    updateCard();
+  }
+
+  function prevCard() {
+    current = (current - 1 + data.length) % data.length;
+    updateCard();
+  }
+
+  function toggleHint() {
+    const hint = document.getElementById("hintText");
+    hint.style.display = hint.style.display === "none" ? "block" : "none";
+  }
+
+  function checkAnswer() {
+    const s = data[current];
+    const stateInput = document.getElementById("stateInput").value.trim().toLowerCase();
+    const capitalInput = document.getElementById("capitalInput").value.trim().toLowerCase();
+    if (stateInput === s.state.toLowerCase() && capitalInput === s.capital.toLowerCase()) {
+      setTimeout(nextCard, 500);
+    }
+  }
+
+  updateCard();
+    
+
+window.onload = function () { updateCard(); };</script>
+</body>
+</html>

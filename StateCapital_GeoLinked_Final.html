@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>State-Capital Interactive Map</title>
+<style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e2f;
+      color: #ffffff;
+      text-align: center;
+      padding: 30px;
+    }
+    .card {
+      background: #2b2b3c;
+      padding: 25px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-width: 700px;
+      margin: 20px auto;
+    }
+    input {
+      margin: 12px 0;
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      background: #3a3a50;
+      color: white;
+      border: 1px solid #666;
+      border-radius: 5px;
+    }
+    img {
+      width: 100%;
+      max-width: 650px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .output {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>🗺️ U.S. States &amp; Capitals Interactive</h1>
+<div class="card">
+<img alt="U.S. map with capitals" src="us_map_with_capitals.jpeg"/>
+<div>
+<input id="stateInput" placeholder="Type a U.S. state (e.g., Texas)" type="text"/>
+<div class="output" id="capitalOutput">Capital: [Waiting for input]</div>
+</div>
+</div>
+<script>
+const stateCapitals = {
+  "Alabama": "Montgomery was the first capital of the Confederacy.",
+  "Alaska": "Juneau is only accessible by boat or plane.",
+  "Arizona": "Phoenix is one of the hottest cities in the U.S.",
+  "Arkansas": "Little Rock has a famous Central High School from civil rights history.",
+  "California": "Sacramento grew rapidly due to the Gold Rush.",
+  "Colorado": "Denver is nicknamed the 'Mile High City'.",
+  "Connecticut": "Hartford is home to the oldest public art museum in the U.S.",
+  "Delaware": "Dover was the first state capital after independence.",
+  "Florida": "Tallahassee is near beautiful Gulf Coast beaches.",
+  "Georgia": "Atlanta hosted the 1996 Summer Olympics.",
+  "Hawaii": "Honolulu is the only U.S. capital with a royal palace.",
+  "Idaho": "Boise sits near the Rocky Mountains.",
+  "Illinois": "Springfield was Abraham Lincoln’s home.",
+  "Indiana": "Indianapolis hosts the Indy 500 race.",
+  "Iowa": "Des Moines is a hub for corn and soybean production.",
+  "Kansas": "Topeka was key in the fight for school desegregation.",
+  "Kentucky": "Frankfort is near famous horse farms.",
+  "Louisiana": "Baton Rouge means 'red stick' in French.",
+  "Maine": "Augusta is known for lobsters and forests.",
+  "Maryland": "Annapolis is home to the U.S. Naval Academy.",
+  "Massachusetts": "Boston played a key role in the American Revolution.",
+  "Michigan": "Lansing is near the Great Lakes.",
+  "Minnesota": "Saint Paul is part of the Twin Cities.",
+  "Mississippi": "Jackson has many blues music festivals.",
+  "Missouri": "Jefferson City is named after President Thomas Jefferson.",
+  "Montana": "Helena is near the Rocky Mountains.",
+  "Nebraska": "Lincoln is known for corn and wide plains.",
+  "Nevada": "Carson City is close to Lake Tahoe.",
+  "New Hampshire": "Concord is one of the oldest U.S. capitals.",
+  "New Jersey": "Trenton hosted a key Revolutionary War battle.",
+  "New Mexico": "Santa Fe has many Native American cultural sites.",
+  "New York": "Albany sits on the Hudson River.",
+  "North Carolina": "Raleigh is part of the 'Research Triangle'.",
+  "North Dakota": "Bismarck is named after a German leader.",
+  "Ohio": "Columbus has one of the biggest college campuses.",
+  "Oklahoma": "Oklahoma City has a large cowboy heritage center.",
+  "Oregon": "Salem is known for cherry trees and state fairs.",
+  "Pennsylvania": "Harrisburg is close to historic Gettysburg.",
+  "Rhode Island": "Providence is one of the oldest U.S. cities.",
+  "South Carolina": "Columbia has a warm subtropical climate.",
+  "South Dakota": "Pierre is near Mount Rushmore.",
+  "Tennessee": "Nashville is the country music capital.",
+  "Texas": "Austin is famous for live music and tacos.",
+  "Utah": "Salt Lake City hosted the 2002 Winter Olympics.",
+  "Vermont": "Montpelier is the smallest U.S. state capital.",
+  "Virginia": "Richmond was capital of the Confederacy.",
+  "Washington": "Olympia is near mountains and ocean.",
+  "West Virginia": "Charleston is in the Appalachian Mountains.",
+  "Wisconsin": "Madison has many lakes and bike trails.",
+  "Wyoming": "Cheyenne celebrates cowboy culture each July."
+};
+
+const stateGeography = {
+  "Alabama": "Alabama is known for montgomery was the first capital of the confederacy.",
+  "Alaska": "Alaska is known for juneau is only accessible by boat or plane.",
+  "Arizona": "Arizona is known for phoenix is one of the hottest cities in the u.s.",
+  "Arkansas": "Arkansas is known for little rock has a famous central high school from civil rights history.",
+  "California": "California is known for sacramento grew rapidly due to the gold rush.",
+  "Colorado": "Colorado is known for denver is nicknamed the 'mile high city'.",
+  "Connecticut": "Connecticut is known for hartford is home to the oldest public art museum in the u.s.",
+  "Delaware": "Delaware is known for dover was the first state capital after independence.",
+  "Florida": "Florida is known for tallahassee is near beautiful gulf coast beaches.",
+  "Georgia": "Georgia is known for atlanta hosted the 1996 summer olympics.",
+  "Hawaii": "Hawaii is known for honolulu is the only u.s. capital with a royal palace.",
+  "Idaho": "Idaho is known for boise sits near the rocky mountains.",
+  "Illinois": "Illinois is known for springfield was abraham lincoln’s home.",
+  "Indiana": "Indiana is known for indianapolis hosts the indy 500 race.",
+  "Iowa": "Iowa is known for des moines is a hub for corn and soybean production.",
+  "Kansas": "Kansas is known for topeka was key in the fight for school desegregation.",
+  "Kentucky": "Kentucky is known for frankfort is near famous horse farms.",
+  "Louisiana": "Louisiana is known for baton rouge means 'red stick' in french.",
+  "Maine": "Maine is known for augusta is known for lobsters and forests.",
+  "Maryland": "Maryland is known for annapolis is home to the u.s. naval academy.",
+  "Massachusetts": "Massachusetts is known for boston played a key role in the american revolution.",
+  "Michigan": "Michigan is known for lansing is near the great lakes.",
+  "Minnesota": "Minnesota is known for saint paul is part of the twin cities.",
+  "Mississippi": "Mississippi is known for jackson has many blues music festivals.",
+  "Missouri": "Missouri is known for jefferson city is named after president thomas jefferson.",
+  "Montana": "Montana is known for helena is near the rocky mountains.",
+  "Nebraska": "Nebraska is known for lincoln is known for corn and wide plains.",
+  "Nevada": "Nevada is known for carson city is close to lake tahoe.",
+  "New Hampshire": "New Hampshire is known for concord is one of the oldest u.s. capitals.",
+  "New Jersey": "New Jersey is known for trenton hosted a key revolutionary war battle.",
+  "New Mexico": "New Mexico is known for santa fe has many native american cultural sites.",
+  "New York": "New York is known for albany sits on the hudson river.",
+  "North Carolina": "North Carolina is known for raleigh is part of the 'research triangle'.",
+  "North Dakota": "North Dakota is known for bismarck is named after a german leader.",
+  "Ohio": "Ohio is known for columbus has one of the biggest college campuses.",
+  "Oklahoma": "Oklahoma is known for oklahoma city has a large cowboy heritage center.",
+  "Oregon": "Oregon is known for salem is known for cherry trees and state fairs.",
+  "Pennsylvania": "Pennsylvania is known for harrisburg is close to historic gettysburg.",
+  "Rhode Island": "Rhode Island is known for providence is one of the oldest u.s. cities.",
+  "South Carolina": "South Carolina is known for columbia has a warm subtropical climate.",
+  "South Dakota": "South Dakota is known for pierre is near mount rushmore.",
+  "Tennessee": "Tennessee is known for nashville is the country music capital.",
+  "Texas": "Texas is known for austin is famous for live music and tacos.",
+  "Utah": "Utah is known for salt lake city hosted the 2002 winter olympics.",
+  "Vermont": "Vermont is known for montpelier is the smallest u.s. state capital.",
+  "Virginia": "Virginia is known for richmond was capital of the confederacy.",
+  "Washington": "Washington is known for olympia is near mountains and ocean.",
+  "West Virginia": "West Virginia is known for charleston is in the appalachian mountains.",
+  "Wisconsin": "Wisconsin is known for madison has many lakes and bike trails.",
+  "Wyoming": "Wyoming is known for cheyenne celebrates cowboy culture each july."
+};
+
+function speak(text) {
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-US";
+  speechSynthesis.speak(utterance);
+}
+
+document.getElementById("stateInput").addEventListener("input", () => {
+  const input = document.getElementById("stateInput").value.trim();
+  const capital = stateCapitals[input];
+  const geo = stateGeography[input];
+  const output = document.getElementById("capitalOutput");
+  const geoOut = document.getElementById("geoOutput");
+
+  if (capital && geo) {
+    output.textContent = "Capital: " + capital;
+    geoOut.textContent = "Geography: " + geo;
+    speak(capital);
+  } else {
+    output.textContent = "Capital: [Unknown or misspelled]";
+    geoOut.textContent = "Geography: [Unavailable]";
+  }
+});
+</script>
+</body>
+</html>
