@@ -1,8 +1,8 @@
 
-# 🇺🇸 U.S. States & Capitals Interactive Learning System | 美国州与首府互动学习系统
+# 🇺🇸 U.S. States & Capitals Interactive Learning System | 美国地名互动学习系统
 
 🎮 **Quick Access to Game | 快速启动游戏**  
-[Start Interactive Game on GitHub Pages »](https://your-username.github.io/your-repo/US_States_2Level_Game_Complete50_Toggle.html)
+[Start Interactive Game on GitHub Pages »](https://goeguo.github.io/GoeGuo/)
 
 ![Preview Screenshot](preview.png)
 
@@ -43,7 +43,7 @@
 
 ---
 
-## 📚 教学用途建议 | Educational Use
+## 📚 教学建议 | Educational Use
 
 本工具设计用于帮助小学与初中学生学习美国地理和英语：
 - 训练学生识记50个州与首府
