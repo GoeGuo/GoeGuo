@@ -33,7 +33,7 @@
 
 📦 GitHub Pages 在线访问：
 ```
-https://your-username.github.io/your-repo/US_States_2Level_Game_Complete50_Toggle.html
+https://GeoGuo.github.io/GeoGuo/US_States_2Level_Game_Complete50_Toggle.html
 ```
 
 或打开以下页面：
