@@ -2,11 +2,11 @@
 # 🇺🇸 U.S. States & Capitals Interactive Learning System
 
 🎮 **Quick Access to Game**  
-[Start Interactive Game on GitHub Pages »](https://your-username.github.io/your-repo/US_States_2Level_Game_Complete50_Toggle.html)
+[Start Interactive Game on GitHub Pages »](https://goeguo.github.io/GoeGuo/)
 
 ![Preview Screenshot](preview.png)
 
-[![View on GitHub Pages](https://img.shields.io/badge/Launch%20App-GitHub%20Pages-blue?style=for-the-badge)](https://your-username.github.io/your-repo/US_States_2Level_Game_Complete50_Toggle.html)
+[![View on GitHub Pages](https://img.shields.io/badge/Launch%20App-GitHub%20Pages-blue?style=for-the-badge)](https://GeoGuo.github.io/GeoGuo/US_States_2Level_Game_Complete50_Toggle.html)
 
 ---
 
